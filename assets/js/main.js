@@ -2,7 +2,7 @@ const pokemonList = document.getElementById('pokemonlist')
 const loadMoreButton = document.getElementById('loadMoreButton')
 
 const maxRecords = 151
-const limit = 150
+const limit = 12
 let offset = 0;
 
 
@@ -10,7 +10,7 @@ let offset = 0;
 function loadPokemonItems(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
         const newHtml = pokemons.map((pokemon) => `
-            <li class="pokemon ${pokemon.type}">
+            <li class="pokemon ${pokemon.type}" onclick="detailsPokemon(${pokemon.number})">
                 <span class="number">#${pokemon.number}</span>
                 <span class="name">${pokemon.name}</span>
 
@@ -26,6 +26,10 @@ function loadPokemonItems(offset, limit) {
         ).join('')
         pokemonList.innerHTML += newHtml
     })
+}
+
+function detailsPokemon () {
+    
 }
 
 loadPokemonItems(offset, limit)
